@@ -1,7 +1,11 @@
 package com.MoodAnalyser;
 
+import java.util.function.Predicate;
+
 public class MoodAnalyzer {
     private String message;
+
+    private static final Predicate<String> sadMood = messege -> messege.contains("Sad");
 
     public MoodAnalyzer() {
         this.message = "";
@@ -16,7 +20,7 @@ public class MoodAnalyzer {
             if (message == null || message.isEmpty()) {
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EMPTY_OR_NULL, "Mood cannot be null or empty");
             }
-            if (message.contains("Sad")) {
+            if (sadMood.test(message)) {
                 return "SAD";
             }
             return "HAPPY";
